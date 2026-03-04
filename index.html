@@ -16,15 +16,16 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#Sobre">Sobre Nosotros</a></li>
-                <li><a href="#Carta">Carta</a></li>
-                <li><a href="#Horarios">Horarios</a></li>
-                <li><a href="#Contacto">Contacto</a></li>
+                <li><a href="#Sobre" class="boton">Sobre Nosotros</a></li>
+                <li><a href="#Carta" class="boton">Nuestra Carta</a></li>
+                <li><a href="#Horarios" class="boton">Horarios</a></li>
+                <li><a href="#Contacto" class="boton">Contacto</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
+<!-- Sobre  -->
         <section id="Sobre">
             <h1>La Esquina</h1>
 
@@ -48,64 +49,125 @@
                     <img src="Imagenes/Segunda.png" alt="Fachada de La Esquina">
                 </div>
             </div>
-
-            <div class="separador"></div>
         </section>
 
-        <section id="Carta">
+<!-- Carta -->
+        <section id="Carta" class="Layout-principal">
             <h2>Nuestra carta</h2>
-            <div class="grid-carta">
-                <div>
-                    <h3>Bebidas</h3>
-                    <p>Café, té, zumo</p>
+            <div class="contenedor-layout">
+                <div class="contenedor-carta">
+<!-- Bebidas -->
+                    <div class="bloque">
+                        <h3>Bebidas</h3>
+                        <ul class="lista-carta">
+                            <li>Café de especialidad filtrado <span class="precio">_4.00€</span></li>
+                            <li>Espresso doble / Macchiato <span class="precio">_2.70</span></li>
+                            <li>Cold Brew infusionado <span class="precio">_4.50€</span></li>
+                            <li>Matcha latte o Golden latte <span class="precio">_4.50</span></li>
+                            <li>Té chai latte <span class="precio">_4.50</span></li>
+                            <li>Té helado de autor <span class="precio">_4.00</span></li>
+                        </ul>
+                    </div>
+
+<!-- Dulces -->
+                    <div class="bloque">
+                        <h3>Dulces</h3>
+                        <ul class="lista-carta">
+                            <li>Croissant de mantequilla <span class="precio">_8,50€</span></li>
+                            <li>Croissant relleno (chocolate blanco/nutella/pistacho) <span class="precio">_4.00€</span></li>
+                            <li>Napolitana de chocolate o crema <span class="precio">_2.50€</span></li>
+                            <li>Ensaimada <span class="precio">_3,50€</span></li>
+                            <li>Rollito de canela <span class="precio">_3.00€</span></li>
+                            <li>Brioche relleno de crema <span class="precio">_4.00€</span></li>
+                        </ul>
+                    </div>
+
+<!-- Salados -->
+                    <div class="bloque">
+                        <h3>Salados</h3>
+                        <ul class="lista-carta">
+                            <li>Tostada de aguacate, huevo poché y semillas <span class="precio">_8,50€</span></li>
+                            <li>Bagel de salmón ahumado, queso crema y eneldo <span class="precio">_7,90€</span></li>
+                            <li>Focaccia de mortadela italiana, burrata y pistacho <span class="precio">_8,90€</span></li>
+                            <li>Empanadilla de atún <span class="precio">_3,50€</span></li>
+                            <li>Tostada caprese (mozzarella fresca, tomate y pesto) <span class="precio">_6,50€</span></li>
+                            <li>Wrap de pollo estilo César <span class="precio">7,50€</span></li>
+                        </ul>
+                    </div>
+
+<!-- Pasteles -->
+                    <div class="bloque">
+                        <h3>Tartas por encargo</h3>
+                        <ul class="lista-carta">
+                            <li>Cheesecake de frutos rojos o oreo <span class="precio">_4.50€/p | 38.00€</span></li>
+                            <li>Tarta de zanahoria con crema de queso <span class="precio">_4,00€/p | 34.00€</span></li>
+                            <li>Brownie de chocolate con nueces <span class="precio">_3.50€/p | 30€</span></li>
+                            <li>Tarta de limón y merengue <span class="precio">_4.50€/p | 38€</span></li>
+                            <li>Carrot & Matcha Layer Cake <span class="precio">_5.00€/p | 42€</span></li>
+                            <li>Tarta de queso japonés <span class="precio">_4.50€/p | 38€</span></li>
+                        </ul>
+                    </div>
                 </div>
-                <div>
-                    <h3>Dulces</h3>
-                    <p>Napolitana, rollito de canela</p>
+
+<!-- Promociones -->
+                <aside class="promociones"> 
+                    <h2>Promociones especiales</h2>
+                    <div class="promo">
+                        <h3>¡Todos los Miércoles!</h3>
+                        <p>Cada miércoles con tu café viene con un <span class="destacado">croissant de regalo</span>.</p>
+                    </div>
+                    <div class="promo">
+                        <h3>¿Es tu cumpleaños?</h3>
+                        <p>No dudes en venir a por tu <span class="destacado">café gratis</span>.</p>
+                    </div>
+                    <div class="promo">
+                        <h3>¡Tartas al mejor precio!</h3>
+                        <p>Encarga 2 tartas y la segunda te sale a <span class="destacado">mitad de precio</span>.</p>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+<!-- Horarios -->
+        <section id="Horarios" class="Horarios">
+            <h2>Horarios</h2>
+            <div class="contenedor-h">
+                <div class="horas">
+                    <h3>De Lunes a Viernes</h3>
+                    <p>8:00-13:00 | 17:00-20:00</p>
                 </div>
-                <div>
-                    <h3>Salados</h3>
-                    <p>Empanadilla, sándwich, wrap</p>
-                </div>
-                <div>
-                    <h3>Pasteles por encargo</h3>
-                    <p>Tarta de queso, brazo de gitano, Milhojas</p>
+                <div class="horas">
+                    <h3>Sábado y Domingo</h3>
+                    <p>9:00-13:00 | 17:00 - 21:00</p>
                 </div>
             </div>
         </section>
 
-        <section id="Horarios">
-            <h2>Horarios</h2>
-            <h3>De Lunes a Viernes</h3>
-            <p>8:00 - 13:00 y 17:00 - 20:00</p>
-            <h3>Sábado y Domingo</h3>
-            <p>9:00 - 13:00 y 17:00 - 21:00</p>
-        </section>
-
-        <section id="Contacto">
+<!-- Contacto -->
+        <section id="Contactos" class="Contactos">
             <h2>Contacto</h2>
-            <h3>Teléfono: 93 458 27 16</h3>
-            <p>Todos los encargos se realizarán con un mínimo de 24h de antelación.</p>
-            <p>También puedes endulzarte más en nuestras redes sociales.</p>
+            <div class="contenedor-c">
+                <div class="tipo">
+                    <h3>Telfono</h3>
+                    <p>- 93 458 27 16 -</p>
+                </div>
+                <div class="tipo">
+                    <h3>Instagram</h3>
+                    <img src="Imagenes/icono.png">
+                </div>
+            </div>
+
+            <div class="nota"> 
+                <p>* Todos los encargos se realizarán con un mínimo de antelación de 24 horas.*</p>
+            </div>
+            
         </section>
     </main>
 
-    <aside> 
-        <h2>Promociones especiales</h2>
-        <div class="promo">
-            <h3>Todos los Miércoles</h3>
-            <p>Cada miércoles tu café viene con un croissant gratuito.</p>
-        </div>
-        <div class="promo">
-            <h3>¿Es tu cumpleaños?</h3>
-            <p>No dudes en venir a por tu café gratis.</p>
-        </div>
-        <div class="promo">
-            <h3>Tartas al mejor precio</h3>
-            <p>Encarga 2 tartas y la segunda te sale a mitad de precio.</p>
-        </div>
-    </aside>
 
+
+
+<!--footer-->
     <footer>
         <div class="footer-contacto">
             <p>Teléfono: 93 458 27 16 | Instagram: @laesquina</p>
@@ -115,5 +177,32 @@
             <p><a href="#">Aviso legal</a> | <a href="#">Política de privacidad</a></p> 
         </div>
     </footer>
+
+
+
+
+
+
+
+
+
+
+
+    <!--Scroll -->
+    <script>
+    document.querySelectorAll('.boton').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const target = document.getElementById(targetId);
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - 70, 
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    </script>
 </body>
 </html>
