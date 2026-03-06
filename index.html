@@ -1,186 +1,299 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Esquina - Pastelería</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configuración rápida para previsualización (Solo si no usas CLI)
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        principal: '#855f43',
+                        blancoweb: '#FDF6F0',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <header>
-        <div class="Logo"> 
-            <img src="Imagenes/Logo.png" alt="LaEsquina"> 
+
+<body class="bg-blancoweb dark:bg-[#8b5f3d93] transition-colors duration-300"> <!--Sobre dark-->
+
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="bg-[#cfae94e6] dark:bg-principal text-white p-3 rounded-full shadow-2xl hover:scale-110 transition-all">
+            <span class="dark:hidden"> ☼ Modo dia</span>
+            <span class="hidden dark:inline"> ☾ Modo noche</span>
+        </button>
+    </div>
+
+    
+
+    <header class="bg-principal rounded-b-3xl">
+        <img src="Imagenes/Logo.png" alt="LogoLaEsquina" class="w-[98%] mx-auto rounded-b-xl">   
+        <p class= "text-blancoweb italic text-2xl text-center font-trebuchet mt-8 "> ~ Endulzándote momentos desde 1959 ~</p>
+            
+        <div class="flex justify-center gap-40 mt-6  ">
+            <a href="#sobre-nosotros" class="bg-principal text-blancoweb px-6 py-3 rounded-lg hover:opacity-80 transition inline-block"> SOBRE NOSOTROS</a>
+            <a href="#carta" class="bg-principal text-blancoweb px-6 py-3 rounded-lg hover:opacity-80 transition inline-block"> NUESTRA CARTA</a>
+            <a href="#horario" class="bg-principal text-blancoweb px-6 py-3 rounded-lg hover:opacity-80 transition inline-block"> HORARIO</a>
+            <a href="#contacto" class="bg-principal text-blancoweb px-6 py-3 rounded-lg hover:opacity-80 transition inline-block"> CONTACTO</a>
         </div>
-        <div class="Endulzando"> 
-            <p>- Endulzándote momentos desde 1959 -</p>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#Sobre" class="boton">Sobre Nosotros</a></li>
-                <li><a href="#Carta" class="boton">Nuestra Carta</a></li>
-                <li><a href="#Horarios" class="boton">Horarios</a></li>
-                <li><a href="#Contactos" class="boton">Contacto</a></li>
-            </ul>
-        </nav>
     </header>
 
     <main>
 <!-- Sobre  -->
-        <section id="Sobre">
-            <h1>La Esquina</h1>
-
-            <div class="fila">
-                <div class="texto"> 
-                    <p>Desde 1959, somos parte de la vida de nuestro pueblo. Nacimos como un pequeño obrador familiar, con recetas caseras y el sueño de crear un lugar donde siempre oliera a café recién hecho y a dulces recién horneados.</p> 
-                </div>
-                <div class="foto">
-                    <img src="Imagenes/Primera.png" alt="Interior de la pastelería"> 
-                </div>
+        <section id="sobre-nosotros" class="scroll-mt-10"></section> <!--Atrae aquí--> 
+        <h1 class="text-principal text-[38px] ml-[2%] mt-2 font-bold">La Esquina </h1>
+        <div class="h-[1.5px] bg-principal mx-auto w-[90%] mt-1"></div> <!--Linea-->  
+        <div class="flex flex-col lg:flex-row items-center justify-center gap-6 mt-6 px-4 lg:px-16">
+            <p class="text-principal lg:w-1/2 text-center"> Desde 1959, somos parte de la vida de nuestro pueblo. Nacimos como un pequeño obrador familiar, con recetas caseras y el sueño de crear un lugar donde siempre oliera a café recién hecho y a dulces recién horneados.</p> 
+            <img src="Imagenes/Primera.png" alt="Interior de la pastelería" class="rounded-xl w-80 h-auto mx-auto hover:scale-105 duration-500 shadow-2xl"> 
+        </div>
+<!--Segunda parte sobre-->
+        
+        <div class="flex flex-col lg:flex-row items-center justify-center gap-6 mt-6 px-4 lg:px-16">
+            <img src="Imagenes/Segunda.png" alt="Fachada" class="rounded-xl w-80 h-auto mx-auto hover:scale-105 duration-500 shadow-2xl"> 
+            <div class="lg:w-1/2 flex flex-col gap-4 text-center">
+                <p class="text-principal">  Aquí han crecido generaciones entre meriendas, celebraciones y conversaciones sin prisa. Hoy seguimos abriendo cada mañana con la misma ilusión, manteniendo el sabor de siempre y el cariño en cada detalle. </p> 
+                <p class="text-principal font-semibold italic"> Porque más que una cafetería, somos hogar.     
             </div>
-
-            <div class="separador"></div>
-
-            <div class="fila inversa"> 
-                <div class="texto">
-                    <p>Aquí han crecido generaciones entre meriendas, celebraciones y conversaciones sin prisa. Hoy seguimos abriendo cada mañana con la misma ilusión, manteniendo el sabor de siempre y el cariño en cada detalle.</p>
-                    <p class="frase-final">Porque más que una cafetería, somos hogar.</p>
-                </div>
-                <div class="foto">
-                    <img src="Imagenes/Segunda.png" alt="Fachada de La Esquina">
-                </div>
-            </div>
-        </section>
+        </div>   
 
 <!-- Carta -->
-        <section id="Carta" class="Layout-principal">
-            <h2>Nuestra carta</h2>
-            <div class="contenedor-layout">
-                <div class="contenedor-carta">
-<!-- Bebidas -->
-                    <div class="bloque">
-                        <h3>Bebidas</h3>
-                        <ul class="lista-carta">
-                            <li>Café de especialidad filtrado <span class="precio">_4.00€</span></li>
-                            <li>Espresso doble / Macchiato <span class="precio">_2.70</span></li>
-                            <li>Cold Brew infusionado <span class="precio">_4.50€</span></li>
-                            <li>Matcha latte o Golden latte <span class="precio">_4.50</span></li>
-                            <li>Té chai latte <span class="precio">_4.50</span></li>
-                            <li>Té helado de autor <span class="precio">_4.00</span></li>
-                        </ul>
-                    </div>
+        <section id="carta" class="scroll-mt-20"></section><!--Atrae aquí-->
+        <h2 class="text-principal text-[38px] ml-[2%] mt-10 font-bold ">Nuestra Carta</h2>
+        <div class="h-[1.5px] bg-principal mx-auto w-[90%] mt-1 mb-8"></div> <!--Linea--> 
 
+        <div class="flex flex-col lg:flex-row items-start justify-center gap-8 px-4 lg:px-16 items-stretch">
+            <div class="bg-principal w-full lg:w-1/3 rounded-3xl p-8 shadow-2xl hover:scale-[1.02] transition-transform duration-300">
+                <h3 class="text-blancoweb text-2xl font-bold mb-6 border-b border-blancoweb/20 pb-2 italic">
+                    Bebidas </h3>
+                <ul class="space-y-4 text-blancoweb/90">
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span>Café de especialidad filtrado</span>
+                        <span class="font-bold text-blancoweb">4.00€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span>Espresso doble / Macchiato</span>
+                        <span class="font-bold text-blancoweb">2.70€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span>Cold Brew infusionado</span>
+                        <span class="font-bold text-blancoweb">4.50€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span>Matcha latte o Golden latte</span>
+                        <span class="font-bold text-blancoweb">4.50€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span>Té chai latte</span>
+                        <span class="font-bold text-blancoweb">4.50€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span>Té helado de autor</span>
+                        <span class="font-bold text-blancoweb">4.00€</span>
+                    </li>
+                </ul>
+            </div>
 <!-- Dulces -->
-                    <div class="bloque">
-                        <h3>Dulces</h3>
-                        <ul class="lista-carta">
-                            <li>Croissant de mantequilla <span class="precio">_8,50€</span></li>
-                            <li>Croissant relleno (chocolate blanco/nutella/pistacho) <span class="precio">_4.00€</span></li>
-                            <li>Napolitana de chocolate o crema <span class="precio">_2.50€</span></li>
-                            <li>Ensaimada <span class="precio">_3,50€</span></li>
-                            <li>Rollito de canela <span class="precio">_3.00€</span></li>
-                            <li>Brioche relleno de crema <span class="precio">_4.00€</span></li>
-                        </ul>
-                    </div>
-
+            <div class="bg-principal w-full lg:w-1/3 rounded-3xl p-8 shadow-2xl hover:scale-[1.02] transition-transform duration-300">
+                <h3 class="text-blancoweb text-2xl font-bold mb-6 border-b border-blancoweb/20 pb-2 italic">
+                    Dulces </h3>
+                <ul class="space-y-4 text-blancoweb/90">
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span>Croissant de mantequilla</span>
+                        <span class="font-bold ml-1 text-blancoweb">3.00€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span>Croissant relleno (chocolate blanco/nutella/pistacho)</span>
+                        <span class="font-bold ml-1 text-blancoweb">4.50€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span>Napolitana de chocolate o crema</span>
+                        <span class="font-bold text-blancoweb">2.50€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span>Ensaimada</span>
+                        <span class="font-bold text-blancoweb">3.50€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span>Rollito de canela</span>
+                        <span class="font-bold text-blancoweb">3.00€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span>Brioche relleno de crema</span>
+                        <span class="font-bold ml-1 text-blancoweb">4.00€</span>
+                    </li>
+                </ul>
+            </div>
 <!-- Salados -->
-                    <div class="bloque">
-                        <h3>Salados</h3>
-                        <ul class="lista-carta">
-                            <li>Tostada de aguacate, huevo poché y semillas <span class="precio">_8,50€</span></li>
-                            <li>Bagel de salmón ahumado, queso crema y eneldo <span class="precio">_7,90€</span></li>
-                            <li>Focaccia de mortadela italiana, burrata y pistacho <span class="precio">_8,90€</span></li>
-                            <li>Empanadilla de atún <span class="precio">_3,50€</span></li>
-                            <li>Tostada caprese (mozzarella fresca, tomate y pesto) <span class="precio">_6,50€</span></li>
-                            <li>Wrap de pollo estilo César <span class="precio">7,50€</span></li>
-                        </ul>
-                    </div>
+            <div class="bg-principal w-full lg:w-1/3 rounded-3xl p-8 shadow-2xl hover:scale-[1.02] transition-transform duration-300">
+                <h3 class="text-blancoweb text-2xl font-bold mb-6 border-b border-blancoweb/20 pb-2 italic">Salados</h3>
+                <ul class="space-y-4 text-blancoweb/90">
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span class="pr-4">Tostada de aguacate, huevo poché y semillas</span>
+                        <span class="font-bold text-blancoweb whitespace-nowrap">8.50€</span></li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span class="pr-4">Bagel de salmón ahumado, queso crema y eneldo</span>
+                        <span class="font-bold text-blancoweb whitespace-nowrap">7.90€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span class="pr-4">Focaccia de mortadela italiana, burrata y pistacho</span>
+                        <span class="font-bold text-blancoweb whitespace-nowrap">8.90€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span class="pr-4">Empanadilla de atún</span>
+                        <span class="font-bold text-blancoweb whitespace-nowrap">3.50€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span class="pr-4">Tostada caprese (mozzarella, tomate y pesto)</span>
+                        <span class="font-bold text-blancoweb whitespace-nowrap">6.50€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span class="pr-4">Wrap de pollo estilo César</span>
+                        <span class="font-bold text-blancoweb whitespace-nowrap">7.50€</span>
+                    </li>
+                </ul>
+            </div>          
 
 <!-- Pasteles -->
-                    <div class="bloque">
-                        <h3>Tartas por encargo</h3>
-                        <ul class="lista-carta">
-                            <li>Cheesecake de frutos rojos o oreo <span class="precio">_4.50€/p | 38.00€</span></li>
-                            <li>Tarta de zanahoria con crema de queso <span class="precio">_4,00€/p | 34.00€</span></li>
-                            <li>Brownie de chocolate con nueces <span class="precio">_3.50€/p | 30€</span></li>
-                            <li>Tarta de limón y merengue <span class="precio">_4.50€/p | 38€</span></li>
-                            <li>Carrot & Matcha Layer Cake <span class="precio">_5.00€/p | 42€</span></li>
-                            <li>Tarta de queso japonés <span class="precio">_4.50€/p | 38€</span></li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="bg-principal w-full lg:w-1/3 rounded-3xl p-8 shadow-2xl hover:scale-[1.02] transition-transform duration-300">
+                <h3 class="text-blancoweb text-2xl font-bold mb-6 border-b border-blancoweb/20 pb-2 italic">Tartas</h3>
+                <ul class="space-y-4 text-blancoweb/90">
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span class="pr-4 text-sm sm:text-base">Cheesecake de frutos rojos u Oreo</span>
+                        <span class="font-bold text-blancoweb whitespace-nowrap text-sm sm:text-base">4.50€/p | 38€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span class="pr-4 text-sm sm:text-base">Tarta de zanahoria y crema de queso</span>
+                        <span class="font-bold text-blancoweb whitespace-nowrap text-sm sm:text-base">4.00€/p | 34€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span class="pr-4 text-sm sm:text-base">Brownie de chocolate con nueces</span>
+                        <span class="font-bold text-blancoweb whitespace-nowrap text-sm sm:text-base">3.50€/p | 30€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span class="pr-4 text-sm sm:text-base">Tarta de limón y merengue</span>
+                        <span class="font-bold text-blancoweb whitespace-nowrap text-sm sm:text-base">4.50€/p | 38€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span class="pr-4 text-sm sm:text-base">Carrot & Matcha Layer Cake</span>
+                        <span class="font-bold text-blancoweb whitespace-nowrap text-sm sm:text-base">5.00€/p | 42€</span>
+                    </li>
+                    <li class="flex justify-between items-end border-b border-dotted border-blancoweb/30 pb-1">
+                        <span class="pr-4 text-sm sm:text-base">Tarta de queso japonés</span>
+                        <span class="font-bold text-blancoweb whitespace-nowrap text-sm sm:text-base">4.50€/p | 38€</span>
+                    </li>
+                </ul>
+            </div>
+
 
 <!-- Promociones -->
-                <aside class="promociones"> 
-                    <h2>Promociones especiales</h2>
-                    <div class="promo">
-                        <h3>¡Todos los Miércoles!</h3>
-                        <p>Cada miércoles con tu café viene con un <span class="destacado">croissant de regalo</span>.</p>
+            <aside class="lg:w-1/5 flex flex-col gap-4">
+                <div class="bg-white border-2 border-principal rounded-3xl p-6 shadow-xl h-full flex flex-col">
+                    <h2 class="text-principal text-xl font-bold mb-4 text-center uppercase tracking-wider border-b border-principal/20 pb-2">Promociones</h2>
+                    
+                    <div class="space-y-6 flex-1 flex flex-col justify-around">
+                        <div class="promo">
+                            <h3 class="font-bold text-principal italic">¡Todos los Miércoles!</h3>
+                            <p class="mt-5 text-sm text-principal">Cada miércoles con tu café viene un <span class="text-principal font-bold">croissant de regalo</span>.</p>
+                        </div>
+                        
+                        <div class="promo">
+                            <h3 class="font-bold text-principal italic">¿Es tu cumpleaños?</h3>
+                            <p class="mt-5 text-sm text-principal">No dudes en venir a por tu <span class="text-principal font-bold">café gratis</span>.</p>
+                        </div>
+                        
+                        <div class="promo">
+                            <h3 class="font-bold text-principal italic">¡Tartas al mejor precio!</h3>
+                            <p class="mt-5 text-sm text-principal">Encarga 2 tartas y la segunda a <span class="text-principal font-bold">mitad de precio</span>.</p>
+                        </div>
                     </div>
-                    <div class="promo">
-                        <h3>¿Es tu cumpleaños?</h3>
-                        <p>No dudes en venir a por tu <span class="destacado">café gratis</span>.</p>
-                    </div>
-                    <div class="promo">
-                        <h3>¡Tartas al mejor precio!</h3>
-                        <p>Encarga 2 tartas y la segunda te sale a <span class="destacado">mitad de precio</span>.</p>
-                    </div>
-                </aside>
-            </div>
-        </section>
+                </div>
+            </aside>
+        </div>
+
+
+<!--Lista-->
+        <section id="lista-compra" class="scroll-mt-20 mt-16 px-4 lg:px-16 mb-20"></section>
+            <h2 class="text-principal text-[28px] ml-[2%] mt-2 font-bold">Lista de productos para futura compra</h2>
+            <div class="h-[1.5px] bg-principal w-full mb-8 opacity-20"></div>
+
+            <form id="formulario-producto" class="flex flex-col w-4/5 mx-auto sm:flex-row gap-4 mb-8">
+                <input 
+                    type="text" 
+                    id="input-producto" 
+                    placeholder="Ej: Croissant de pistacho"
+                    class="flex-1 p-4 rounded-xl border-2 border-fondo focus:border-principal focus:outline-none transition-colors bg-fondo shadow-sm" required>
+                <button 
+                    type="submit"
+                    class="bg-principal text-blancoweb px-8 py-4 rounded-xl font-bold hover:scale-105 active:scale-95 transition-all shadow-lg hover:opacity-90">Añadir a la lista</button>
+            </form>
+
+            <ul id="lista-productos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                </ul>
+
 
 <!-- Horarios -->
-        <section id="Horarios" class="Horarios">
-            <h2>Horarios</h2>
-            <div class="contenedor-h">
-                <div class="horas">
-                    <h3>De Lunes a Viernes</h3>
-                    <p>8:00-13:00 | 17:00-20:00</p>
+        <section id="horario" class="scroll-mt-10"></section> <!--Atrae aquí-->         
+            <h1 class="text-principal text-[38px] ml-[2%] mt-2 font-bold">Horarios </h1>
+            <div class="h-[1.5px] bg-principal mx-auto w-[90%] mt-1 mb-8"></div> <!--Linea-->
+            <div class="flex flex-col lg:flex-row items-center justify-center gap-8 px-4 lg:px-16 w-full">
+                
+                <div class="bg-white border-principal rounded-3xl p-6 shadow-xl w-full max-w-sm flex flex-col space-y-6 justify-around">
+                    <h3 class="font-bold text-principal italic text-center">DE LUNES A VIERNES</h3>
+                    <p class="mt-5 text-sm text-principal text-center">8:00-13:00 | 17:00-20:00</p>
                 </div>
-                <div class="horas">
-                    <h3>Sábado y Domingo</h3>
-                    <p>9:00-13:00 | 17:00 - 21:00</p>
+                
+                <div class="bg-white border-principal rounded-3xl p-6 shadow-xl w-full max-w-sm flex flex-col space-y-6 justify-around">
+                    <h3 class="font-bold text-principal italic text-center">SABADO Y DOMINGO</h3>
+                    <p class="mt-5 text-sm text-principal text-center">9:00-13:00 | 17:00 - 21:00</p>
                 </div>
             </div>
-        </section>
+
 
 <!-- Contacto -->
-        <section id="Contactos" class="Contactos">
-            <h2>Contacto</h2>
-            <div class="contenedor-c">
-                <div class="tipo">
-                    <h3>Telfono</h3>
-                    <p>- 93 458 27 16 -</p>
-                </div>
-                <div class="tipo">
-                    <h3>Instagram</h3>
-                    <img src="Imagenes/icono.png">
-                </div>
-            </div>
+        <section id="contacto" class="scroll-mt-20"></section><!--Atrae aquí-->
+            <h2 class="text-principal text-[38px] ml-[2%] mt-2 font-bold">Contacto</h2>
+            <div class="h-[1.5px] bg-principal mx-auto w-[90%] mt-1 mb-8"></div>
 
-            <div class="nota"> 
-                <p>* Todos los encargos se realizarán con un mínimo de antelación de 24 horas.*</p>
+                <div class="flex flex-col lg:flex-row items-center justify-center gap-8 px-4 lg:px-16 w-full max-w-4xl mx-auto">
+
+                <div class="bg-principal border-2 border-principal rounded-3xl p-6 shadow-xl flex-1 h-32 flex flex-col items-center justify-center">
+                    <h3 class="font-bold text-blancoweb italic text-center">TELEFONO</h3>
+                    <p class="mt-2 text-sm text-blancoweb text-center">~ 93 458 27 16 ~</p>
+                </div>
+
+                <div class="bg-principal border-2 border-principal rounded-3xl p-6 shadow-xl flex-1 h-32 flex flex-col items-center justify-center">
+                    <h3 class="font-bold text-blancoweb italic text-center mb-2">INSTAGRAM</h3>
+                    <p class="mt-2 text-sm text-blancoweb text-center">@LaEsquina</p>
+                </div>
             </div>
-            
-        </section>
+            <p class="text-principal italic text-center font-trebuchet mt-2 mb-12">*Todos los encargos se realizarán con un mínimo de antelación de 24 horas.*</p>
     </main>
 
 
 
 
 <!--footer-->
-    <footer>
-        <div class="footer-contacto">
-            <p>Teléfono: 93 458 27 16 | Instagram: @laesquina</p>
-        </div>    
-        <div class="footer-legal">
-            <p>© 2026 Pastelería La Esquina - Todos los derechos reservados</p>
-            <p><a href="#">Aviso legal</a> | <a href="#">Política de privacidad</a></p> 
-        </div>
+    <footer class="bg-principal rounded-t-3xl p-6 mx-4">
+        <p class="text-blancoweb font-bold text-center font-trebuchet mt-4">T. 93 458 27 16 | Instagram: @laesquina</p>
+
+        <p class="text-blancoweb text-center font-trebuchet mt-4 mb-2"> 2026 Pastelería La Esquina - Todos los derechos reservados</p>
+
+        <p class="text-sm text-center mt-2">
+            <a href="#" class="hover:underline">Aviso legal</a> |
+            <a href="#" class="hover:underline">Política de privacidad</a>
+        </p>
     </footer>
 
 
-
-    <!--Scroll -->
+<!--scroll -->
     <script>
     document.querySelectorAll('.boton').forEach(btn => {
         btn.addEventListener('click', function(e) {
@@ -195,6 +308,24 @@
             }
         });
     });
+    </script>
+
+    <script src="app.js"></script>
+    <script>
+            const btn = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+
+            btn.addEventListener('click', () => {
+                html.classList.toggle('dark');
+                // Opcional: Guardar preferencia en localStorage
+                const isDark = html.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+
+            // Cargar preferencia al iniciar
+            if (localStorage.getItem('theme') === 'dark') {
+                html.classList.add('dark');
+            }
     </script>
 </body>
 </html>
