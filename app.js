@@ -39,7 +39,7 @@ filtroInput.placeholder = " ⌕ Buscar en mi lista...";
 filtroInput.id = "filtro-lista";
 
 //  estilo de barra de escribir
-filtroInput.className = "w-[80%] ml-[10%] pl-10 p-3 mb-6 rounded-xl border-2 !border-secundario bg-fondo text-white focus:!border-principal focus:outline-none transition-all italic text-sm shadow-sm";
+filtroInput.className = "w-[80%] ml-[10%] pl-10 p-3 mb-6 rounded-xl border-2 !border-secundario bg-fondo text-principal focus:!border-principal focus:outline-none transition-all italic text-sm shadow-sm";
 
 listaUl.parentNode.insertBefore(filtroInput, listaUl);
 
