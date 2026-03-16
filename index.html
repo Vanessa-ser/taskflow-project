@@ -34,7 +34,7 @@
     
 
     <header class="bg-principal rounded-b-3xl">
-        <img src="Imagenes/Logo.png" alt="LogoLaEsquina" class="w-[98%] mx-auto rounded-b-xl">   
+        <img src="Imagenes/Logo.png" alt="LogoLaEsquina" loading="lazy" class="w-[98%] mx-auto rounded-b-xl">   
         <p class= "text-blancoweb italic text-2xl text-center font-trebuchet mt-8 "> ~ Endulzándote momentos desde 1959 ~</p>
             
         <div class="flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-10 mt-6 px-4">
@@ -52,12 +52,12 @@
         <div class="h-[1.5px] bg-principal mx-auto w-[90%] mt-1"></div> <!--Linea-->  
         <div class="flex flex-col lg:flex-row items-center justify-center gap-6 mt-6 px-4 lg:px-16">
             <p class="text-principal lg:w-1/2 text-center"> Desde 1959, somos parte de la vida de nuestro pueblo. Nacimos como un pequeño obrador familiar, con recetas caseras y el sueño de crear un lugar donde siempre oliera a café recién hecho y a dulces recién horneados.</p> 
-            <img src="Imagenes/Primera.png" alt="Interior de la pastelería" class="rounded-xl w-80 h-auto mx-auto hover:scale-105 duration-500 shadow-2xl"> 
+            <img src="Imagenes/Primera.png" alt="Interior de la pastelería" loading="lazy" class="rounded-xl w-80 h-auto mx-auto hover:scale-105 duration-500 shadow-2xl"> 
         </div>
 <!--Segunda parte sobre-->
         
         <div class="flex flex-col lg:flex-row items-center justify-center gap-6 mt-6 px-4 lg:px-16">
-            <img src="Imagenes/Segunda.png" alt="Fachada" class="rounded-xl w-80 h-auto mx-auto hover:scale-105 duration-500 shadow-2xl"> 
+            <img src="Imagenes/Segunda.png" alt="Fachada" loading="lazy" class="rounded-xl w-80 h-auto mx-auto hover:scale-105 duration-500 shadow-2xl"> 
             <div class="lg:w-1/2 flex flex-col gap-4 text-center">
                 <p class="text-principal">  Aquí han crecido generaciones entre meriendas, celebraciones y conversaciones sin prisa. Hoy seguimos abriendo cada mañana con la misma ilusión, manteniendo el sabor de siempre y el cariño en cada detalle. </p> 
                 <p class="text-principal font-semibold italic"> Porque más que una cafetería, somos hogar.     
@@ -221,22 +221,47 @@
 
 <!--Lista-->
         <section id="lista-compra" class="scroll-mt-20 mt-16 px-4 lg:px-16 mb-20"></section>
-            <h2 class="text-principal text-[28px] ml-[2%] mt-2 font-bold">Lista de productos para futura compra</h2>
+            <h2 class="text-principal text-[28px] ml-[2%] mt-2 font-bold">Haz tu pedido</h2>
             <div class="h-[1.5px] bg-principal w-full mb-8 opacity-20"></div>
 
             <form id="formulario-producto" class="flex flex-col w-4/5 mx-auto sm:flex-row gap-4 mb-8">
-                <input 
-                    type="text" 
-                    id="input-producto" 
-                    placeholder="Ej: Croissant de pistacho"
-                    class="flex-1 p-4 rounded-xl border-2 border-fondo focus:border-principal focus:outline-none transition-colors bg-fondo shadow-sm" required>
+                <div class="flex-1 flex flex-col gap-2">
+                    <input 
+                        type="text" 
+                        id="input-producto" 
+                        placeholder="Ej: Croissant de pistacho"
+                        class="w-full p-4 rounded-xl border-2 border-fondo focus:border-principal focus:outline-none transition-colors bg-fondo shadow-sm" required>
+                    <!-- Sugerencias de productos (autocompletar) -->
+                    <ul id="sugerencias-producto" class="space-y-1"></ul>
+                    <!-- Mensaje tipo tarjeta debajo del input -->
+                    <div id="mensaje-estado-producto" class="hidden mt-1 bg-white/90 border-2 border-principal rounded-xl px-4 py-2 shadow-sm text-principal text-sm italic"></div>
+                </div>
                 <button 
                     type="submit"
-                    class="bg-principal text-blancoweb px-8 py-4 rounded-xl font-bold hover:scale-105 active:scale-95 transition-all shadow-lg hover:opacity-90">Añadir a la lista</button>
+                    class="bg-principal text-blancoweb px-8 py-4 rounded-xl font-bold hover:scale-105 active:scale-95 transition-all shadow-lg hover:bg-green-600 hover:opacity-90">
+                    Añadir a la lista <span class="ml-2" aria-label="Carrito" role="img">🛒</span>
+                </button>
             </form>
 
             <ul id="lista-productos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                </ul>
+            </ul>
+
+            <!-- Total del carrito -->
+            <div class="w-4/5 mx-auto mt-4 flex justify-end">
+                <div class="flex flex-col items-stretch gap-3 max-w-xs w-full">
+                    <p class="text-principal font-bold text-lg text-right">
+                        Total: <span id="total-carrito">0.00€</span>
+                    </p>
+                    <p id="promo-tartas-msg" class="text-principal text-sm text-right italic hidden">
+                        *Promoción de segunda tarta a mitad de precio
+                    </p>
+                    <button
+                        type="button"
+                        class="bg-principal text-blancoweb px-6 py-2 rounded-xl font-bold self-end hover:scale-105 active:scale-95 transition-all shadow-lg hover:bg-[#cfae94e6] hover:opacity-90 text-sm">
+                        Realizar pedido
+                    </button>
+                </div>
+            </div>
 
 
 <!-- Horarios -->
@@ -276,10 +301,6 @@
             </div>
             <p class="text-principal italic text-center font-trebuchet mt-2 mb-12">*Todos los encargos se realizarán con un mínimo de antelación de 24 horas.*</p>
     </main>
-
-
-
-
 <!--footer-->
     <footer class="bg-principal rounded-t-3xl p-6 mx-4">
         <p class="text-blancoweb font-bold text-center font-trebuchet mt-4">T. 93 458 27 16 | Instagram: @laesquina</p>
