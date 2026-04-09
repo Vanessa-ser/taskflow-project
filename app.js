@@ -25,7 +25,7 @@ const productosCarta = [
     "Tarta de queso japonés"
 ];
 
-// Precios por producto (por ración)
+// precios por producto (por ración)
 const preciosCarta = {
     "Café de especialidad filtrado": 4.0,
     "Espresso doble / Macchiato": 2.7,
@@ -53,7 +53,7 @@ const preciosCarta = {
     "Tarta de queso japonés": 4.5
 };
 
-// Seleccionamos los elementos del DOM
+// seleccionamos los elementos del DOM
 const formulario = document.getElementById("formulario-producto");
 const inputProducto = document.getElementById("input-producto");
 const listaUl = document.getElementById("lista-productos");
@@ -74,19 +74,17 @@ const tartasPromo = new Set([
 ]);
 
 /**
- * Normaliza un texto eliminando espacios en blanco al inicio y final
- * y convirtiéndolo a minúsculas para comparaciones consistentes.
- * @param {string} texto - Texto original introducido por el usuario o definido en la carta.
- * @returns {string} Texto normalizado en minúsculas y sin espacios extremos.
+ * 
+ * @param {string} texto
+ * @returns {string} 
  */
 function normalizarTexto(texto) {
     return texto.trim().toLowerCase();
 }
 
 /**
- * Comprueba si un producto existe en la carta oficial.
- * La comparación se hace de forma insensible a mayúsculas/minúsculas y espacios extremos.
- * @param {string} nombre - Nombre del producto a comprobar.
+
+ * @param {string} nombre - nombre del producto a comprobar
  * @returns {boolean} `true` si el producto está en `productosCarta`, `false` en caso contrario.
  */
 function existeEnCarta(nombre) {
@@ -95,9 +93,9 @@ function existeEnCarta(nombre) {
 }
 
 /**
- * Busca un producto ya añadido en la lista de compra.
- * @param {string} nombre - Nombre del producto que se quiere localizar en la lista.
- * @returns {{nombre: string, cantidad: number} | undefined} El producto encontrado o `undefined` si no existe.
+ * busca un producto ya añadido en la lista de compra.
+ * @param {string} nombre - nombre del producto que se quiere localizar en la lista.
+ * @returns {{nombre: string, cantidad: number} | undefined} l producto encontrado o `undefined` si no existe.
  */
 function buscarProductoEnLista(nombre) {
     const buscado = normalizarTexto(nombre);
@@ -105,8 +103,8 @@ function buscarProductoEnLista(nombre) {
 }
 
 /**
- * Muestra un mensaje de estado debajo del campo de entrada para informar al cliente.
- * @param {string} texto - Mensaje a mostrar al usuario.
+ * muestra un mensaje de estado para informar al cliente.
+ * @param {string} texto - mensaje a mostrar al usuario.
  * @returns {void}
  */
 function mostrarMensajeEstado(texto) {
@@ -180,12 +178,13 @@ function actualizarAlmacenamiento() {
 }
 
 /**
- * Calcula el descuento aplicable a un producto de tipo tarta según la promoción:
+ * calcula el descuento aplicable:
+ * 
  * por cada 2 unidades del mismo pastel, la segunda se cobra al 50%.
- * @param {number} precioUnitario - Precio de una unidad del producto.
- * @param {number} cantidad - Cantidad de unidades del producto en el carrito.
- * @param {string} nombre - Nombre del producto para comprobar si entra en la promoción.
- * @returns {number} Importe de descuento a aplicar sobre ese producto (en euros).
+ * @param {number} precioUnitario - precio de una unidad del producto.
+ * @param {number} cantidad - cantidad de unidades del producto en el carrito.
+ * @param {string} nombre - nombre del producto para comprobar si entra en la promoción.
+ * @returns {number} importe de descuento a aplicar sobre ese producto (en euros).
  */
 function calcularDescuentoTartas(precioUnitario, cantidad, nombre) {
     if (!tartasPromo.has(nombre) || precioUnitario <= 0) return 0;
@@ -202,7 +201,7 @@ function calcularDescuentoTartas(precioUnitario, cantidad, nombre) {
 function renderizarProductos() {
     listaUl.innerHTML = "";
 
-    // Mensaje amable cuando no hay productos en la lista
+    // mensaje cuando no hay productos en la lista
     if (productos.length === 0) {
         const liVacio = document.createElement("li");
         liVacio.className =
@@ -239,11 +238,11 @@ function renderizarProductos() {
         span.className = "text-principal font-medium";
 
         const contControles = document.createElement("div");
-        // En móvil: botones en fila y precio debajo; en pantallas grandes: todo en fila
+        // en móvil: botones en fila y precio debajo; en pantallas grandes: todo en fila
         contControles.className = "flex flex-col sm:flex-row items-center gap-1 sm:gap-3";
 
         const contBotones = document.createElement("div");
-        // En móvil los botones se apilan en vertical; en escritorio, en horizontal
+        // en móvil los botones se apilan en vertical; en escritorio, en horizontal
         contBotones.className = "flex flex-col sm:flex-row items-center gap-2";
 
         const spanPrecio = document.createElement("span");
@@ -304,19 +303,19 @@ function renderizarProductos() {
     }
 }
 
-// Autocompletado: sugerir productos de la carta al escribir
+// autocompletado: sugerir productos de la carta al escribir
 inputProducto.addEventListener("input", () => {
     const texto = normalizarTexto(inputProducto.value);
 
-    // Limpiar sugerencias anteriores
+    // limpiar sugerencias anteriores
     sugerenciasUl.innerHTML = "";
 
-    // Si no hay texto, no mostramos nada
+    // si no hay texto, no mostramos nada
     if (texto.length === 0) {
         return;
     }
 
-    // Buscar coincidencias en la carta oficial
+    // buscar coincidencias en la carta oficial
     const coincidencias = productosCarta
         .filter(p => normalizarTexto(p).startsWith(texto))
         .slice(0, 5); // máximo 5 sugerencias
@@ -377,3 +376,33 @@ filtroInput.addEventListener("input", () => {
         item.style.display = textoItem.includes(busqueda) ? "flex" : "none";
     });
 });
+
+
+const API_URL = 'http://localhost:3000/api/v1/tasks';
+
+const cargarTareas = async () => {
+    const contenedor = document.getElementById('taskList');
+    if (!contenedor) return;
+
+    try {
+        const respuesta = await axios.get(API_URL);
+        const tareas = respuesta.data;
+        
+        contenedor.innerHTML = '<h2 class="text-principal text-2xl font-bold mb-4 border-b pb-2 italic">📋 Tareas del Backend</h2>'; 
+        
+        tareas.forEach(tarea => {
+            const item = document.createElement('div');
+            item.className = "bg-blancoweb p-3 mb-3 rounded-xl border-l-4 border-principal shadow-sm flex justify-between items-center";
+            item.innerHTML = `
+                <span class="text-principal font-medium">${tarea.title}</span>
+                <span class="text-xs bg-principal text-white px-2 py-1 rounded-full">Prioridad: ${tarea.priority}</span>
+            `;
+            contenedor.appendChild(item);
+        });
+    } catch (error) {
+        console.error('Error al conectar:', error);
+        contenedor.innerHTML = '<p class="text-red-500 font-bold">⚠️ El servidor de Node.js no responde.</p>';
+    }
+};
+
+cargarTareas();

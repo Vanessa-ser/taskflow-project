@@ -18,4 +18,4 @@ Aquí se documentarán los prompts utilizados para interactuar con herramientas 
 
 9.'Escribe la lógica para que, si la lista de productos está vacía, se muestre un mensaje amable que diga 'Aún no has añadido antojos'
 
-10.
+10.'Añade un efecto de 'lazy loading' a todas las imágenes del proyecto para que la web cargue más rápido en conexiones lentas.'

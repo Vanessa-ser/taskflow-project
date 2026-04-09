@@ -5,7 +5,7 @@ En este documento se compararán diferentes herramientas de inteligencia artific
 Aquí se analizarán sus ventajas, desventajas y su utilidad durante el desarrollo.
 _______________________________________________________________________________________________________________________________________________
 ·Event loop:
-----------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
    -> ChatGPT:
     ......................................
            - Explicame que es un event loop en JavaScript con ejemplos.
@@ -158,10 +158,10 @@ ________________________________________________________________________________
                 3.Al terminar, sus callbacks van al Task Queue (o Microtask Queue).
                 4.El event loop mueve callbacks al stack cuando está vacío, priorizando siempre las microtasks.
            Esto es lo que hace que JavaScript pueda manejar miles de peticiones de red, timers y eventos sin necesitar múltiples hilos.
-  _________________________________________________________________________________________________________________________________
+  _______________________________________________________________________________________________
 
   ·DOM:
-  ----------------------------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------------------------
    -> ChatGPT:
     ......................................
            - Explicame que es DOM en JavaScript con ejemplos.
