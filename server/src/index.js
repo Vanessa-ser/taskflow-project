@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { port } = require('./config/env');
+const { host, port } = require('./config/env');
 const taskRoutes = require('./routes/task.routes');
 
 const app = express();
@@ -34,10 +34,11 @@ app.use((err, req, res, next) => {
 });
 
 // --- 6. Inicio del Servidor ---
-app.listen(port, () => {
+app.listen(port, host, () => {
   console.log('----------------------------------------------');
   console.log(`🚀 Servidor TaskFlow encendido`);
-  console.log(`📍 URL: http://localhost:${port}/api/v1/tasks`);
+  console.log(`📍 URL local: http://localhost:${port}/api/v1/tasks`);
+  console.log(`🌐 URL red:   http://<IP-DE-TU-PC>:${port}/api/v1/tasks`);
   console.log('----------------------------------------------');
 });
 

@@ -378,31 +378,156 @@ filtroInput.addEventListener("input", () => {
 });
 
 
-const API_URL = 'http://localhost:3000/api/v1/tasks';
+const API_BASE_LOCAL = 'http://localhost:3000';
+const API_BASE_REMOTE = 'https://taskflow-project-fpc2.onrender.com';
+const enLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+let apiBaseActiva = enLocalhost ? API_BASE_LOCAL : API_BASE_REMOTE;
 
-const cargarTareas = async () => {
-    const contenedor = document.getElementById('taskList');
-    if (!contenedor) return;
-
+/**
+ * Ejecuta una petición contra la API activa y, si falla por red en local,
+ * reintenta automáticamente contra Render.
+ * @param {(baseUrl: string) => Promise<any>} peticion
+ * @returns {Promise<any>}
+ */
+const ejecutarConFallback = async (peticion) => {
     try {
-        const respuesta = await axios.get(API_URL);
-        const tareas = respuesta.data;
-        
-        contenedor.innerHTML = '<h2 class="text-principal text-2xl font-bold mb-4 border-b pb-2 italic">📋 Tareas del Backend</h2>'; 
-        
-        tareas.forEach(tarea => {
-            const item = document.createElement('div');
-            item.className = "bg-blancoweb p-3 mb-3 rounded-xl border-l-4 border-principal shadow-sm flex justify-between items-center";
-            item.innerHTML = `
-                <span class="text-principal font-medium">${tarea.title}</span>
-                <span class="text-xs bg-principal text-white px-2 py-1 rounded-full">Prioridad: ${tarea.priority}</span>
-            `;
-            contenedor.appendChild(item);
-        });
+        return await peticion(apiBaseActiva);
     } catch (error) {
-        console.error('Error al conectar:', error);
-        contenedor.innerHTML = '<p class="text-red-500 font-bold">⚠️ El servidor de Node.js no responde.</p>';
+        const falloDeRed = error?.message === 'Network Error' || error?.code === 'ERR_NETWORK';
+        const puedeFallback = apiBaseActiva === API_BASE_LOCAL;
+
+        if (falloDeRed && puedeFallback) {
+            apiBaseActiva = API_BASE_REMOTE;
+            return peticion(apiBaseActiva);
+        }
+
+        throw error;
     }
 };
 
-cargarTareas();
+/**
+ * Petición HTTP asíncrona (GET): obtiene todas las tareas del servidor.
+ * @returns {Promise<Array>} lista de tareas.
+ */
+const obtenerTareas = async () => {
+    const respuesta = await ejecutarConFallback((baseUrl) => axios.get(`${baseUrl}/api/v1/tasks`));
+    return respuesta.data;
+};
+
+/**
+ * Petición HTTP asíncrona (POST): crea una nueva tarea.
+ * @param {{ title: string, priority: string }} datos
+ * @returns {Promise<object>} tarea creada.
+ */
+const crearTarea = async (datos) => {
+    const respuesta = await ejecutarConFallback((baseUrl) => axios.post(`${baseUrl}/api/v1/tasks`, datos));
+    return respuesta.data;
+};
+
+/**
+ * Petición HTTP asíncrona (DELETE): elimina una tarea por id.
+ * @param {string} id
+ * @returns {Promise<void>}
+ */
+const eliminarTarea = async (id) => {
+    await ejecutarConFallback((baseUrl) => axios.delete(`${baseUrl}/api/v1/tasks/${id}`));
+};
+
+const renderizarBloqueTareas = async () => {
+    const contenedor = document.getElementById('taskList');
+    if (!contenedor) return;
+
+    contenedor.innerHTML = `
+        <h2 class="text-principal text-2xl font-bold mb-4 border-b pb-2 italic">📋 Tareas del Backend</h2>
+        <form id="form-task-api" class="flex flex-col sm:flex-row gap-2 mb-4">
+            <input id="task-title-api" type="text" minlength="3" required placeholder="Título de la tarea"
+                class="flex-1 p-2 rounded-lg border-2 border-principal/40 focus:outline-none focus:border-principal" />
+            <select id="task-priority-api"
+                class="p-2 rounded-lg border-2 border-principal/40 focus:outline-none focus:border-principal">
+                <option value="low">Baja</option>
+                <option value="medium" selected>Media</option>
+                <option value="high">Alta</option>
+            </select>
+            <button type="submit" class="bg-principal text-white px-4 py-2 rounded-lg hover:opacity-90 transition">
+                Añadir
+            </button>
+        </form>
+        <div id="task-feedback-api" class="text-sm mb-3 text-principal"></div>
+        <div id="task-items-api" class="space-y-2"></div>
+    `;
+
+    const feedback = document.getElementById('task-feedback-api');
+    const items = document.getElementById('task-items-api');
+    const formularioTareas = document.getElementById('form-task-api');
+    const inputTitulo = document.getElementById('task-title-api');
+    const inputPrioridad = document.getElementById('task-priority-api');
+
+    const dibujarTareas = async () => {
+        try {
+            const tareas = await obtenerTareas();
+            items.innerHTML = '';
+
+            if (!Array.isArray(tareas) || tareas.length === 0) {
+                items.innerHTML = '<p class="italic text-principal/70">No hay tareas todavía.</p>';
+                return;
+            }
+
+            tareas.forEach((tarea) => {
+                const item = document.createElement('div');
+                item.className = 'bg-blancoweb p-3 rounded-xl border-l-4 border-principal shadow-sm flex justify-between items-center gap-3';
+
+                const texto = document.createElement('span');
+                texto.className = 'text-principal font-medium';
+                texto.textContent = `${tarea.title} (Prioridad: ${tarea.priority ?? 'medium'})`;
+
+                const botonEliminar = document.createElement('button');
+                botonEliminar.className = 'text-xs bg-red-600 text-white px-3 py-1 rounded-full hover:bg-red-700 transition';
+                botonEliminar.textContent = 'Eliminar';
+                botonEliminar.addEventListener('click', async () => {
+                    try {
+                        await eliminarTarea(tarea.id);
+                        feedback.textContent = 'Tarea eliminada correctamente.';
+                        await dibujarTareas();
+                    } catch (error) {
+                        console.error('Error al eliminar tarea:', error);
+                        feedback.textContent = 'No se pudo eliminar la tarea.';
+                    }
+                });
+
+                item.appendChild(texto);
+                item.appendChild(botonEliminar);
+                items.appendChild(item);
+            });
+        } catch (error) {
+            console.error('Error al obtener tareas:', error);
+            items.innerHTML = '<p class="text-red-500 font-bold">⚠️ El servidor de Node.js no responde.</p>';
+        }
+    };
+
+    formularioTareas.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const title = inputTitulo.value.trim();
+        const priority = inputPrioridad.value;
+
+        if (title.length < 3) {
+            feedback.textContent = 'El título debe tener al menos 3 caracteres.';
+            return;
+        }
+
+        try {
+            await crearTarea({ title, priority });
+            feedback.textContent = 'Tarea creada correctamente.';
+            inputTitulo.value = '';
+            inputTitulo.focus();
+            await dibujarTareas();
+        } catch (error) {
+            console.error('Error al crear tarea:', error);
+            const mensajeServidor = error?.response?.data?.message;
+            feedback.textContent = mensajeServidor || 'No se pudo crear la tarea.';
+        }
+    });
+
+    await dibujarTareas();
+};
+
+renderizarBloqueTareas();
