@@ -1,57 +1,35 @@
-const productosCarta = [
-    "Café de especialidad filtrado",
-    "Espresso doble / Macchiato",
-    "Cold Brew infusionado",
-    "Matcha latte o Golden latte",
-    "Té chai latte",
-    "Té helado de autor",
-    "Croissant de mantequilla",
-    "Croissant relleno (chocolate blanco/nutella/pistacho)",
-    "Napolitana de chocolate o crema",
-    "Ensaimada",
-    "Rollito de canela",
-    "Brioche relleno de crema",
-    "Tostada de aguacate, huevo poché y semillas",
-    "Bagel de salmón ahumado, queso crema y eneldo",
-    "Focaccia de mortadela italiana, burrata y pistacho",
-    "Empanadilla de atún",
-    "Tostada caprese (mozzarella, tomate y pesto)",
-    "Wrap de pollo estilo César",
-    "Cheesecake de frutos rojos u Oreo",
-    "Tarta de zanahoria y crema de queso",
-    "Brownie de chocolate con nueces",
-    "Tarta de limón y merengue",
-    "Carrot & Matcha Layer Cake",
-    "Tarta de queso japonés"
+const catalogoProductos = [
+    { nombre: "Café de especialidad filtrado", precio: 4.0 },
+    { nombre: "Espresso doble / Macchiato", precio: 2.7 },
+    { nombre: "Cold Brew infusionado", precio: 4.5 },
+    { nombre: "Matcha latte o Golden latte", precio: 4.5 },
+    { nombre: "Té chai latte", precio: 4.5 },
+    { nombre: "Té helado de autor", precio: 4.0 },
+    { nombre: "Croissant de mantequilla", precio: 3.0 },
+    { nombre: "Croissant relleno (chocolate blanco/nutella/pistacho)", precio: 4.5 },
+    { nombre: "Napolitana de chocolate o crema", precio: 2.5 },
+    { nombre: "Ensaimada", precio: 3.5 },
+    { nombre: "Rollito de canela", precio: 3.0 },
+    { nombre: "Brioche relleno de crema", precio: 4.0 },
+    { nombre: "Tostada de aguacate, huevo poché y semillas", precio: 8.5 },
+    { nombre: "Bagel de salmón ahumado, queso crema y eneldo", precio: 7.9 },
+    { nombre: "Focaccia de mortadela italiana, burrata y pistacho", precio: 8.9 },
+    { nombre: "Empanadilla de atún", precio: 3.5 },
+    { nombre: "Tostada caprese (mozzarella, tomate y pesto)", precio: 6.5 },
+    { nombre: "Wrap de pollo estilo César", precio: 7.5 },
+    { nombre: "Cheesecake de frutos rojos u Oreo", precio: 38.0 },
+    { nombre: "Tarta de zanahoria y crema de queso", precio: 34.0 },
+    { nombre: "Brownie de chocolate con nueces", precio: 30.0 },
+    { nombre: "Tarta de limón y merengue", precio: 38.0 },
+    { nombre: "Carrot & Matcha Layer Cake", precio: 42.0 },
+    { nombre: "Tarta de queso japonés", precio: 38.0 }
 ];
 
-// precios por producto (por ración)
-const preciosCarta = {
-    "Café de especialidad filtrado": 4.0,
-    "Espresso doble / Macchiato": 2.7,
-    "Cold Brew infusionado": 4.5,
-    "Matcha latte o Golden latte": 4.5,
-    "Té chai latte": 4.5,
-    "Té helado de autor": 4.0,
-    "Croissant de mantequilla": 3.0,
-    "Croissant relleno (chocolate blanco/nutella/pistacho)": 4.5,
-    "Napolitana de chocolate o crema": 2.5,
-    "Ensaimada": 3.5,
-    "Rollito de canela": 3.0,
-    "Brioche relleno de crema": 4.0,
-    "Tostada de aguacate, huevo poché y semillas": 8.5,
-    "Bagel de salmón ahumado, queso crema y eneldo": 7.9,
-    "Focaccia de mortadela italiana, burrata y pistacho": 8.9,
-    "Empanadilla de atún": 3.5,
-    "Tostada caprese (mozzarella, tomate y pesto)": 6.5,
-    "Wrap de pollo estilo César": 7.5,
-    "Cheesecake de frutos rojos u Oreo": 4.5,
-    "Tarta de zanahoria y crema de queso": 4.0,
-    "Brownie de chocolate con nueces": 3.5,
-    "Tarta de limón y merengue": 4.5,
-    "Carrot & Matcha Layer Cake": 5.0,
-    "Tarta de queso japonés": 4.5
-};
+// Derivados del mismo catálogo para evitar duplicar datos.
+const productosCarta = catalogoProductos.map((producto) => producto.nombre);
+const preciosCarta = Object.fromEntries(
+    catalogoProductos.map((producto) => [producto.nombre, producto.precio])
+);
 
 // seleccionamos los elementos del DOM
 const formulario = document.getElementById("formulario-producto");
@@ -205,8 +183,11 @@ function renderizarProductos() {
     if (productos.length === 0) {
         const liVacio = document.createElement("li");
         liVacio.className =
-            "w-[80%] ml-[10%] bg-fondo border-2 border-dashed border-principal/40 rounded-xl p-4 text-center text-principal italic text-sm";
-        liVacio.textContent = "Aún no has añadido antojos";
+            "flex w-[80%] ml-[10%] justify-between items-center gap-4 bg-fondo p-4 rounded-xl shadow-sm border-2 border-dashed border-principal/40";
+        const textoVacio = document.createElement("span");
+        textoVacio.className = "text-principal font-medium italic text-sm";
+        textoVacio.textContent = "No hay productos en tu lista";
+        liVacio.appendChild(textoVacio);
         listaUl.appendChild(liVacio);
 
         if (totalCarritoSpan) {
@@ -291,7 +272,14 @@ function renderizarProductos() {
     const totalFinal = totalBruto - descuentoTartas;
 
     if (totalCarritoSpan) {
-        totalCarritoSpan.textContent = `${totalFinal.toFixed(2)}€`;
+        if (descuentoTartas > 0) {
+            totalCarritoSpan.innerHTML = `
+                <span class="line-through opacity-70 mr-2">${totalBruto.toFixed(2)}€</span>
+                <span>${totalFinal.toFixed(2)}€</span>
+            `;
+        } else {
+            totalCarritoSpan.textContent = `${totalFinal.toFixed(2)}€`;
+        }
     }
 
     if (promoTartasMsg) {
@@ -336,34 +324,45 @@ inputProducto.addEventListener("input", () => {
 });
 
 //añadir productos que sí estén (permitiendo cantidades)
+const agregarProductoALaLista = (nombreProducto) => {
+    const texto = nombreProducto.trim();
+
+    if (!(texto && existeEnCarta(texto))) {
+        inputProducto.classList.add("border-red-500");
+        mostrarMensajeEstado("Este producto no está en nuestra carta.");
+        return;
+    }
+
+    // Buscar si ya existe en la lista para aumentar cantidad
+    const existente = buscarProductoEnLista(texto);
+    if (existente) {
+        existente.cantidad += 1;
+    } else {
+        productos.push({ nombre: texto, cantidad: 1 });
+    }
+
+    actualizarAlmacenamiento();
+    renderizarProductos();
+    inputProducto.value = "";
+    inputProducto.focus();
+    inputProducto.classList.remove("border-red-500");
+    sugerenciasUl.innerHTML = "";
+    mostrarMensajeEstado("Producto añadido correctamente.");
+};
+
 formulario.addEventListener("submit", (e) => {
     e.preventDefault();
-    const texto = inputProducto.value.trim();
+    agregarProductoALaLista(inputProducto.value);
+});
 
-    if (texto && existeEnCarta(texto)) {
-        // Buscar si ya existe en la lista para aumentar cantidad
-        const existente = buscarProductoEnLista(texto);
-
-        if (existente) {
-            existente.cantidad += 1;
-        } else {
-            productos.push({ nombre: texto, cantidad: 1 });
-        }
-
-        actualizarAlmacenamiento();
-        renderizarProductos();
-        inputProducto.value = "";
-        inputProducto.focus();
-        inputProducto.classList.remove("border-red-500");
-        sugerenciasUl.innerHTML = "";
-        mostrarMensajeEstado("Producto añadido correctamente.");
-    } else {
-        // mensaje al cliente si el producto no existe en la carta
-        inputProducto.classList.add("border-red-500");
-        if (!existeEnCarta(texto)) {
-            mostrarMensajeEstado("Este producto no está en nuestra carta.");
-        }
-    }
+// añadir al carrito pulsando productos en "Nuestra Carta"
+const itemsCarta = document.querySelectorAll("#lista-carta li");
+itemsCarta.forEach((item) => {
+    item.classList.add("cursor-pointer", "hover:bg-blancoweb/20", "rounded-xl", "px-4", "py-1", "transition-colors");
+    item.addEventListener("click", () => {
+        const nombre = item.querySelector("span")?.textContent?.trim() ?? "";
+        agregarProductoALaLista(nombre);
+    });
 });
 
 // filtro de la lista
@@ -377,15 +376,21 @@ filtroInput.addEventListener("input", () => {
     });
 });
 
-
-const API_BASE_LOCAL = 'http://localhost:3000';
 const API_BASE_REMOTE = 'https://taskflow-project-fpc2.onrender.com';
-const enLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-let apiBaseActiva = enLocalhost ? API_BASE_LOCAL : API_BASE_REMOTE;
+let apiBaseActiva = API_BASE_REMOTE;
+const temaTareas = {
+    titulo: 'text-principal',
+    fondoPanel: 'bg-blancoweb',
+    bordePanel: 'border-secundario',
+    fondoTarjeta: 'bg-fondo',
+    bordeTarjeta: 'border-principal',
+    textoPrincipal: 'text-principal',
+    botonAgregar: 'bg-principal hover:bg-secundario',
+    botonEliminar: 'bg-principal hover:bg-secundario'
+};
 
 /**
- * Ejecuta una petición contra la API activa y, si falla por red en local,
- * reintenta automáticamente contra Render.
+ * Ejecuta una petición contra la API desplegada en Render.
  * @param {(baseUrl: string) => Promise<any>} peticion
  * @returns {Promise<any>}
  */
@@ -393,14 +398,6 @@ const ejecutarConFallback = async (peticion) => {
     try {
         return await peticion(apiBaseActiva);
     } catch (error) {
-        const falloDeRed = error?.message === 'Network Error' || error?.code === 'ERR_NETWORK';
-        const puedeFallback = apiBaseActiva === API_BASE_LOCAL;
-
-        if (falloDeRed && puedeFallback) {
-            apiBaseActiva = API_BASE_REMOTE;
-            return peticion(apiBaseActiva);
-        }
-
         throw error;
     }
 };
@@ -438,23 +435,24 @@ const renderizarBloqueTareas = async () => {
     if (!contenedor) return;
 
     contenedor.innerHTML = `
-        <h2 class="text-principal text-2xl font-bold mb-4 border-b pb-2 italic">📋 Tareas del Backend</h2>
+        <h2 class="${temaTareas.titulo} text-2xl font-bold mb-4 border-b pb-2 italic">📋 Tareas del Backend</h2>
         <form id="form-task-api" class="flex flex-col sm:flex-row gap-2 mb-4">
             <input id="task-title-api" type="text" minlength="3" required placeholder="Título de la tarea"
-                class="flex-1 p-2 rounded-lg border-2 border-principal/40 focus:outline-none focus:border-principal" />
+                class="flex-1 p-2 rounded-lg border-2 ${temaTareas.bordePanel} focus:outline-none ${temaTareas.titulo}" />
             <select id="task-priority-api"
-                class="p-2 rounded-lg border-2 border-principal/40 focus:outline-none focus:border-principal">
+                class="p-2 rounded-lg border-2 ${temaTareas.bordePanel} focus:outline-none ${temaTareas.titulo}">
                 <option value="low">Baja</option>
                 <option value="medium" selected>Media</option>
                 <option value="high">Alta</option>
             </select>
-            <button type="submit" class="bg-principal text-white px-4 py-2 rounded-lg hover:opacity-90 transition">
+            <button type="submit" class="${temaTareas.botonAgregar} text-white px-4 py-2 rounded-lg transition">
                 Añadir
             </button>
         </form>
-        <div id="task-feedback-api" class="text-sm mb-3 text-principal"></div>
+        <div id="task-feedback-api" class="text-sm mb-3 ${temaTareas.titulo}"></div>
         <div id="task-items-api" class="space-y-2"></div>
     `;
+    contenedor.classList.add(temaTareas.fondoPanel, 'border-2', temaTareas.bordePanel);
 
     const feedback = document.getElementById('task-feedback-api');
     const items = document.getElementById('task-items-api');
@@ -474,14 +472,14 @@ const renderizarBloqueTareas = async () => {
 
             tareas.forEach((tarea) => {
                 const item = document.createElement('div');
-                item.className = 'bg-blancoweb p-3 rounded-xl border-l-4 border-principal shadow-sm flex justify-between items-center gap-3';
+                item.className = `${temaTareas.fondoTarjeta} p-3 rounded-xl border-l-4 ${temaTareas.bordeTarjeta} shadow-sm flex justify-between items-center gap-3`;
 
                 const texto = document.createElement('span');
-                texto.className = 'text-principal font-medium';
+                texto.className = `${temaTareas.textoPrincipal} font-medium`;
                 texto.textContent = `${tarea.title} (Prioridad: ${tarea.priority ?? 'medium'})`;
 
                 const botonEliminar = document.createElement('button');
-                botonEliminar.className = 'text-xs bg-red-600 text-white px-3 py-1 rounded-full hover:bg-red-700 transition';
+                botonEliminar.className = `text-xs ${temaTareas.botonEliminar} text-white px-3 py-1 rounded-full transition`;
                 botonEliminar.textContent = 'Eliminar';
                 botonEliminar.addEventListener('click', async () => {
                     try {

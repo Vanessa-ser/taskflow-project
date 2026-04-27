@@ -15,7 +15,11 @@
                 extend: {
                     colors: {
                         principal: '#855f43',
+                        secundario: '#c39d80',
+                        fondo: '#EFE7DD',
                         blancoweb: '#FDF6F0',
+                        superficieDark: '#8b5f3d93',
+                        acentoSuave: '#cfae94e6',
                     }
                 }
             }
@@ -23,10 +27,10 @@
     </script>
 </head>
 
-<body class="bg-blancoweb dark:bg-[#8b5f3d93] transition-colors duration-300"> <!--Sobre dark-->
+<body class="bg-blancoweb dark:bg-superficieDark transition-colors duration-300"> <!--Sobre dark-->
 
     <div class="fixed top-4 right-4 z-50">
-        <button id="theme-toggle" class="bg-[#cfae94e6] dark:bg-principal text-white p-3 rounded-full shadow-2xl hover:scale-110 transition-all">
+        <button id="theme-toggle" class="bg-acentoSuave dark:bg-principal text-white p-3 rounded-full shadow-2xl hover:scale-110 transition-all">
             <span class="dark:hidden"> ☼ Modo dia</span>
             <span class="hidden dark:inline"> ☾ Modo noche</span>
         </button>
@@ -70,7 +74,7 @@
         <h2 class="text-principal text-[38px] ml-[2%] mt-10 font-bold ">Nuestra Carta</h2>
         <div class="h-[1.5px] bg-principal mx-auto w-[90%] mt-1 mb-8"></div> <!--Linea--> 
 
-        <div class="flex flex-col lg:flex-row items-start justify-center gap-8 px-4 lg:px-16 items-stretch">
+        <div id="lista-carta" class="flex flex-col lg:flex-row items-start justify-center gap-8 px-4 lg:px-16 items-stretch">
             <div class="bg-principal w-full lg:w-1/3 rounded-3xl p-8 shadow-2xl hover:scale-[1.02] transition-transform duration-300">
                 <h3 class="text-blancoweb text-2xl font-bold mb-6 border-b border-blancoweb/20 pb-2 italic">
                     Bebidas </h3>
@@ -212,7 +216,7 @@
                         
                         <div class="promo">
                             <h3 class="font-bold text-principal italic">¡Tartas al mejor precio!</h3>
-                            <p class="mt-5 text-sm text-principal">Encarga 2 tartas y la segunda a <span class="text-principal font-bold">mitad de precio</span>.</p>
+                            <p class="mt-5 text-sm text-principal">Encarga 2 tartas iguales y la segunda te sale a <span class="text-principal font-bold">mitad de precio</span>.</p>
                         </div>
                     </div>
                 </div>
@@ -228,20 +232,21 @@
             <form id="formulario-producto" class="flex flex-col w-4/5 mx-auto sm:flex-row gap-4 mb-8">
                 <div class="flex-1 flex flex-col gap-2">
                     <input 
-                        type="text" 
-                        id="input-producto" 
-                        placeholder="Ej: Croissant de pistacho"
-                        class="w-full p-4 rounded-xl border-2 border-fondo focus:border-principal focus:outline-none transition-colors bg-fondo shadow-sm" required>
+                    type="text" 
+                    id="input-producto" 
+                    placeholder="Ej: Croissant de pistacho"
+                    class="w-full h-14 px-4 rounded-xl border-2 border-principal focus:border-principal focus:outline-none transition-colors bg-fondo shadow-sm" required>
+                
                     <!-- Sugerencias de productos (autocompletar) -->
                     <ul id="sugerencias-producto" class="space-y-1"></ul>
                     <!-- Mensaje tipo tarjeta debajo del input -->
                     <div id="mensaje-estado-producto" class="hidden mt-1 bg-white/90 border-2 border-principal rounded-xl px-4 py-2 shadow-sm text-principal text-sm italic"></div>
                 </div>
                 <button 
-                    type="submit"
-                    class="bg-principal text-blancoweb px-8 py-4 rounded-xl font-bold hover:scale-105 active:scale-95 transition-all shadow-lg hover:bg-green-600 hover:opacity-90">
-                    Añadir a la lista <span class="ml-2" aria-label="Carrito" role="img">🛒</span>
-                </button>
+                type="submit"
+                class="h-14 bg-principal text-blancoweb px-8 rounded-xl font-bold hover:scale-105 active:scale-95 transition-all shadow-lg hover:bg-acentoSuave hover:opacity-90 whitespace-nowrap">
+                Añadir a la lista 🛒
+            </button>
             </form>
 
             <ul id="lista-productos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -254,11 +259,11 @@
                         Total: <span id="total-carrito">0.00€</span>
                     </p>
                     <p id="promo-tartas-msg" class="text-principal text-sm text-right italic hidden">
-                        *Promoción de segunda tarta a mitad de precio
+                        *Promoción de tarta aplicada
                     </p>
                     <button
                         type="button"
-                        class="bg-principal text-blancoweb px-6 py-2 rounded-xl font-bold self-end hover:scale-105 active:scale-95 transition-all shadow-lg hover:bg-[#cfae94e6] hover:opacity-90 text-sm">
+                        class="bg-principal text-blancoweb px-6 py-2 rounded-xl font-bold self-end hover:scale-105 active:scale-95 transition-all shadow-lg hover:bg-acentoSuave hover:opacity-90 text-sm">
                         Realizar pedido
                     </button>
                 </div>
